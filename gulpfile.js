@@ -1,7 +1,7 @@
 const gulp        = require('gulp');
-const browserSync = require('browser-sync').create();
 const sass        = require('gulp-sass');
 const eslint      = require('gulp-eslint');
+const electron    = require('electron-connect').server.create();
 
 gulp.task('lint', function () {
     // ESLint ignores files with "node_modules" paths.
@@ -17,27 +17,24 @@ gulp.task('lint', function () {
         .pipe(eslint.format())
         // To have the process exit with an error code (1) on
         // lint error, return the stream and pipe to failAfterError last.
-        .pipe(eslint.failAfterError())
-        .pipe(browserSync.stream());
+        .pipe(eslint.failAfterError());
 });
 // Compile sass into CSS & auto-inject into browsers
 gulp.task('sass', function() {
-    return gulp.src("app/scss/*.scss")
+    return gulp.src("windows/scss/*.scss")
         .pipe(sass())
-        .pipe(gulp.dest("app/css"))
-        .pipe(browserSync.stream());
+        .pipe(gulp.dest("windows/css"));
 });
 // Static Server + watching scss/html files
 gulp.task('serve', ['sass', 'lint'], function() {
+  // Start browser process
+  electron.start();
 
-    browserSync.init({
-        server: "./app"
-    });
-
-
-    gulp.watch("app/js/*js", ['lint']);
-    gulp.watch("app/scss/*.scss", ['sass']).on('change', browserSync.reload);
-    gulp.watch("app/*.html").on('change', browserSync.reload);
+  // Restart browser process
+  gulp.watch('windows/**/js/*.js', ['lint'], electron.restart);
+  gulp.watch("windows/**/scss/*.scss", ['sass'], electron.restart);
+  // Reload renderer process
+  gulp.watch(['main.js', 'windows/**/*.html'], electron.reload);
 });
 
 gulp.task('default', ['serve']);

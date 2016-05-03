@@ -6,9 +6,13 @@
   <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-  <p>Here will be the body of new html component</p>
+  <!-- build:remove -->
+  <!-- Connect to server process -->
+  <script>require('electron-connect').client.create()</script>
+  <!-- end:build -->
+  <p>Main window</p>
 
-  <script src="https://cdn.jsdelivr.net/lodash/4.11.2/lodash.min.js"></script>
+  <script>require('lodash')</script>
   <script src="js/main.js"></script>
 </body>
 </html>
