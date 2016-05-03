@@ -6,7 +6,9 @@ Starter include:
 * sass to css compilation
 * linting with eslint
 * browser-sync to speed up development
-##Todo
+
+## Todo
+
 * concat and minify css
 * concat and minify js
 * minify html
