@@ -1,11 +1,11 @@
-# Web Starter Kit
+# Electron Starter Kit
 
-It's a starter kit which use gulp to work on simple html/js/css components.
+It's a starter kit which use gulp to work on simple html/js/css windows.
 
 Starter include:
 * sass to css compilation
 * linting with eslint
-* browser-sync to speed up development
+* electron reload to speed up development
 
 ## Todo
 
