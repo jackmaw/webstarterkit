@@ -7,6 +7,8 @@ Starter include:
 * linting with eslint
 * browser-sync to speed up development
 
+## Electron Starter Kit is available in branch electron-starter-kit
+
 ## Todo
 
 * concat and minify css
